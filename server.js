@@ -10,9 +10,10 @@ const app = express();
 
 // ✅ Proper CORS setup for GitHub Pages + Localhost + Render
 const allowedOrigins = [
-  "https://nairkartik08.github.io", // GitHub Pages domain (no trailing slash)
-  "http://localhost:5500"           // Local testing
+  "https://dead-jpg.github.io/Jobcloud-frontend/",  // For frontend testing
+  "http://localhost:3000"   // If using React/Vite later
 ];
+
 
 app.use(
   cors({
@@ -40,16 +41,18 @@ app.use(express.json()); // Handle JSON payloads
 
 // ✅ Use a connection pool (recommended for Render + Clever Cloud)
 const db = mysql.createPool({
-  host: process.env.DB_HOST || "byv8d8fkl1igdntxfgrm7-mysql.services.clever-cloud.com",
-  user: process.env.DB_USER || "u0zuail7471hurs7",
-  password: process.env.DB_PASSWORD || "veaUyTAt6BvCyWD5yJXs",
-  database: process.env.DB_NAME || "byv8d8fkl1igdntxfgrm7",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
   ssl: { rejectUnauthorized: false },
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
+
+
 
 db.getConnection((err, connection) => {
   if (err) {

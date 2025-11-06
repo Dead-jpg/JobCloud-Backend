@@ -10,28 +10,19 @@ const app = express();
 
 // ✅ Proper CORS setup for GitHub Pages + Localhost + Render
 const allowedOrigins = [
-  "https://dead-jpg.github.io",                         // your GitHub Pages main domain
-  "https://dead-jpg.github.io/Jobcloud-frontend",       // your project repo path
-  "https://jobcloud-backend-dcs9.onrender.com",         // your Render backend
-  "http://localhost:3000",                              // for local testing
-  "http://localhost:5000"
+  "https://dead-jpg.github.io",
+  "https://dead-jpg.github.io/Jobcloud-frontend",
+  "https://jobcloud-backend-dcs9.onrender.com",
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.warn("🚫 Blocked by CORS:", origin);
-        callback(new Error("CORS not allowed for this origin"));
-      }
-    },
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
+
 
 
 // ✅ Handle preflight requests directly
